@@ -54,7 +54,7 @@ streamlit run app.py
 详细构建指南请查阅：[mobile-webapp/BUILD_GUIDE.md](mobile-webapp/BUILD_GUIDE.md)
 
 ## ⚠️ 注意事项
-
+- Releases版本是给Android用的
 - 本工具使用传统的图像修复算法 (Inpainting)，适用于**背景简单、水印较小**的情况。
 - 对于**大面积遮挡、复杂纹理背景**或**半透明全屏水印**，修复效果可能有限（这类场景通常需要深度学习模型如 LaMa 等，本项目暂未集成以保持轻量）。
 
