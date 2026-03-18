@@ -12,5 +12,11 @@
     "@capacitor/ios": "^5.0.0",
     "@capacitor/camera": "^5.0.0",
     "@capacitor/filesystem": "^5.0.0"
+<<<<<<< HEAD
+=======
+  },
+  "devDependencies": {
+      "@capacitor/android": "^5.0.0"
+>>>>>>> 7331d37c3392f9c88e6f5d7ac32f1758341b6cce
   }
 }

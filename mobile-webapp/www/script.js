@@ -45,15 +45,6 @@ let lastX = 0;
 let lastY = 0;
 let scale = 1;
 
-<<<<<<< HEAD
-// 初始化 DOM
-let lastX = 0;
-let lastY = 0;
-let isDrawing = false;
-let brushSize = 20;
-
-=======
->>>>>>> 7331d37c3392f9c88e6f5d7ac32f1758341b6cce
 document.addEventListener('DOMContentLoaded', () => {
     // 强制先隐藏其他界面，只显示加载页
     document.querySelectorAll('.screen').forEach(el => el.style.display = 'none');
@@ -313,12 +304,6 @@ function setupEditor(img) {
     }, 200);   
 }
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 7331d37c3392f9c88e6f5d7ac32f1758341b6cce
 function saveImage() {
     const canvas = document.querySelector('.result-container canvas');
     if (canvas) {
@@ -327,8 +312,4 @@ function saveImage() {
         link.href = canvas.toDataURL();
         link.click();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7331d37c3392f9c88e6f5d7ac32f1758341b6cce
