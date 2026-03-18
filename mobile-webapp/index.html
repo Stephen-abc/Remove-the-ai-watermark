@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>AI 智能去水印</title>
+    <!-- iOS 适配 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/color/180/image-processing.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入OpenCV.js (从CDN) -->
+    <script async src="https://docs.opencv.org/4.5.1/opencv.js" onload="onOpenCvReady()"></script>
+</head>
+<body>
+    <div id="loading-overlay">
+        <div class="loader"></div>
+        <p>正在加载 AI 引擎...</p>
+    </div>
+
+    <!-- 启动时的“最新图片”提示弹窗 -->
+    <div id="latest-photo-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📸 发现新图片</h3>
+            </div>
+            <div class="modal-body">
+                <p>是否处理相册中最新的照片？</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeLatestModal()">📂 选多张</button>
+                <button class="btn-primary" onclick="confirmProcessLatest()">✨ 确认处理</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 欢迎界面 / 首页 -->
+    <div id="home-screen" class="screen active">
+        <div class="header">
+            <h1>✨ AI 去水印</h1>
+            <p>无需上传云端，本地极速处理</p>
+        </div>
+        
+        <div class="preview-area" id="latest-preview-area" onclick="triggerUpload()">
+            <div class="placeholder">
+                <span class="icon">🖼️</span>
+                <p>点击选择图片</p>
+                <small>支持相册、拍照</small>
+            </div>
+            <img id="preview-thumb" style="display:none">
+        </div>
+
+        <div class="action-buttons">
+            <input type="file" id="file-input" accept="image/*" style="display:none" onchange="handleFileSelect(event)">
+            <button class="btn-primary" onclick="triggerUpload()">
+                <span class="icon">➕</span> 添加图片
+            </button>
+        </div>
+        
+        <div class="tips">
+            <p>💡 提示：添加到主屏幕体验更佳</p>
+        </div>
+    </div>
+
+    <!-- 编辑界面 -->
+    <div id="editor-screen" class="screen">
+        <div class="toolbar-top">
+            <button class="btn-icon" onclick="showHomeScreen()">⬅️</button>
+            <span>涂抹水印区域</span>
+            <button class="btn-text" onclick="processImage()">✨ 去除</button>
+        </div>
+
+        <div class="canvas-container" id="canvas-container">
+            <img id="source-image">
+            <canvas id="mask-canvas"></canvas>
+        </div>
+
+        <div class="toolbar-bottom">
+            <div class="slider-container">
+                <span>笔刷</span>
+                <input type="range" id="brush-size" min="5" max="50" value="20">
+            </div>
+            <button class="btn-icon" onclick="clearMask()">🗑️ 清空</button>
+            <button class="btn-icon" onclick="toggleCompare()" id="compare-btn">👁️ 对比</button>
+        </div>
+    </div>
+
+    <!-- 结果界面 -->
+    <div id="result-screen" class="screen">
+        <div class="toolbar-top">
+            <button class="btn-icon" onclick="showEditorScreen()">⬅️ 重修</button>
+            <span>处理结果</span>
+            <button class="btn-text" onclick="saveImage()">⬇️ 保存</button>
+        </div>
+        
+        <div class="result-container">
+            <canvas id="result-canvas"></canvas>
+        </div>
+        
+        <div class="toolbar-bottom" style="justify-content: center;">
+            <button class="btn-primary" onclick="window.location.reload()">再来一张</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
